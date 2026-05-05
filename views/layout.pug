@@ -1,16 +1,17 @@
+include mixins/nav.pug 
+include mixins/alert.pug
+
 doctype html
-include ../mixins/nav.pug 
 html
   head
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/styles.css')
     block metadata
+
   body
-    nav
-      ul
-        +nav
+    +nav
     main
       div(style="padding: 20px")
         link(rel="stylesheet", href="style.css")
-            block content
+        block content

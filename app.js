@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // rutas
 app.get("/",(req, res , next)=>{
-    res.render("layout");
+    res.render("index");
 })
 
 app.get("/login",(req, res , next)=>{

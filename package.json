@@ -1,9 +1,17 @@
 {
   "name": "trabajointegradorweb",
   "version": "1.0.0",
-  "description": "",
+  "description": "TPI WEB 2",
+  "homepage": "https://github.com/angelfabiandagata-ui/TPI-WEB2#readme",
+  "bugs": {
+    "url": "https://github.com/angelfabiandagata-ui/TPI-WEB2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelfabiandagata-ui/TPI-WEB2.git"
+  },
   "license": "ISC",
-  "author": "",
+  "author": "Fabian D'Agata",
   "type": "module",
   "main": "app.js",
   "scripts": {
@@ -12,6 +20,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "pug": "^3.0.4"
   }
