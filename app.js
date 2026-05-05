@@ -19,6 +19,10 @@ app.get("/",(req, res , next)=>{
     res.render("index");
 })
 
+app.get("/index",(req, res , next)=>{
+    res.render("index");
+})
+
 app.get("/login",(req, res , next)=>{
     res.render("login");
 })
