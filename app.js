@@ -1,6 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
 import pug from 'pug';
+import { auth } from './middleware/auth.js';
+
+
+
 // CONSTANTES
 const PORT = process.env.PORT;
 const app = express();
