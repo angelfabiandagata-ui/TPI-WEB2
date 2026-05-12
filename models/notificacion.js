@@ -14,9 +14,13 @@ notificacion.init({
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  user_id: {
+  user_id_emisor: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
+  },
+  user_id_receptor: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },    
   comment_id: {
     type: DataTypes.INTEGER,
@@ -24,20 +28,29 @@ notificacion.init({
   },
   valoracion_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
 },
   denuncia_publicacion_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   denuncia_user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   denuncia_comentario_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
+  fecha: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    },
+  leida: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },  
 }, {
   sequelize,
   modelName: "notificacion",
