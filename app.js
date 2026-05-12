@@ -2,7 +2,8 @@ import 'dotenv/config';
 import express from 'express';
 import pug from 'pug';
 import { auth } from './middleware/auth.js';
-
+import './models/sync.js';
+import sequelize, { connectDatabase } from './models/config.js';
 
 
 // CONSTANTES
@@ -31,12 +32,18 @@ app.get("/login",(req, res , next)=>{
     res.render("login");
 })
 
-// lisener del servidor
-app.listen(PORT, (err) => {
-  if(err) {
-    console.error('Error al iniciar el servidor:', err);
-    return;
-  }
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+
+// lisener del servidor y conexion a la base de datos
+connectDatabase()
+  .then(() => {
+    app.listen(PORT, (err) => {
+      if (err) {
+        console.error(" [X] Error al iniciar el servidor: ", err);
+      }
+      console.log(` [✓] Servidor corriendo en el puerto:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error(" [X] Error al conectar a la base de datos: ", err);
+  });
 
