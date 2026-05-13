@@ -1,9 +1,9 @@
 import { Model,  DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class denuncia_publicacion extends Model {}
+export class complaint_publication extends Model {}
 
-denuncia_publicacion.init({
+complaint_publication.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -18,7 +18,7 @@ denuncia_publicacion.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },    
-  contenido: {
+  content: {
     type: DataTypes.STRING(255),
     allowNull: false,
 },
@@ -26,18 +26,18 @@ denuncia_publicacion.init({
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  motivo: {
+  reason: {
     type: DataTypes.STRING(60),
     allowNull: false,
   },
-  estado: {
+  state: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
 }, {
   sequelize,
-  modelName: "denuncia_publicacion",
-  tableName: "denuncias_publicaciones",
+  modelName: "complaint_publication",
+  tableName: "complaints_publications",
   createdAt: true,
   deletedAt: true,
 });

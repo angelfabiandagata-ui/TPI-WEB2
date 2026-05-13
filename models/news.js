@@ -1,9 +1,9 @@
 import { Model,  DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class notificacion extends Model {}
+export class news extends Model {}
 
-notificacion.init({
+news.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -26,35 +26,35 @@ notificacion.init({
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  valoracion_id: {
+  assessment_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
 },
-  denuncia_publicacion_id: {
+  complaint_publication_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  denuncia_user_id: {
+  complaint_user_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  denuncia_comentario_id: {
+  complaint_comment_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  fecha: {
+  date: {
     type: DataTypes.DATE,
     allowNull: false,
     },
-  leida: {
+  read: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   },  
 }, {
   sequelize,
-  modelName: "notificacion",
-  tableName: "notificaciones",
+  modelName: "news",
+  tableName: "news",
   createdAt: true,
   deletedAt: true,
 });

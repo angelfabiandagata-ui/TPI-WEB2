@@ -1,9 +1,9 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import sequelize from "./config.js";
 
-export class coleccion extends Model {}
+export class collection extends Model {}
 
-coleccion.init(
+collection.init(
     {
         id:{
             type:DataTypes.INTEGER,
@@ -19,23 +19,23 @@ coleccion.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        titulo:{
+        title:{
             type:DataTypes.STRING,
             allowNull:false,
         },
-        categoria:{
+        category:{
             type:DataTypes.STRING,
             allowNull:false,
         },
-        publico:{
+        public:{
             type:DataTypes.BOOLEAN,
             allowNull:false,
         },
     },
         {
             sequelize,
-            modelName: 'coleccion',
-            tableName: 'colecciones',
+            modelName: 'collection',
+            tableName: 'collections',
             createdAt: true,
             deletedAt: true,
             updatedAt: true,

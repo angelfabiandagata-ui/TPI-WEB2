@@ -1,9 +1,9 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import sequelize from "./config.js";
 
-export class favorito extends Model {}
+export class buy extends Model {}
 
-favorito.init(
+buy.init(
   {
     post_id: {
       type: DataTypes.INTEGER,
@@ -16,8 +16,8 @@ favorito.init(
   },
   {
     sequelize,
-    modelName: "favorito",
-    tableName: "favoritos",
+    modelName: "buy",
+    tableName: "buys",
     createdAt: true,
     deletedAt: true,
   },

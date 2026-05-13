@@ -1,9 +1,9 @@
 import { Model,  DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class imagen extends Model {}
+export class image extends Model {}
 
-imagen.init({
+image.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -18,29 +18,29 @@ imagen.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  tipo: {
+  type: {
     type: DataTypes.STRING(50),
   },
-  promedio: {
+  average: {
     type: DataTypes.FLOAT,
   },
-  copyrigth: {
+  copyright: {
     type: DataTypes.BOOLEAN,
   },
-  licencia: {
+  license: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
-  marcaAgua: {
+  watermark: {
     type: DataTypes.STRING,
   },
-  texto_personalizado: {
+  custom_text: {
     type: DataTypes.STRING,
   },
 }, {
   sequelize,
-  modelName: "imagen",
-  tableName: "imagenes",
+  modelName: "image",
+  tableName: "images",
   createdAt: true,
   deletedAt: true,
 });

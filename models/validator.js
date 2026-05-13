@@ -1,30 +1,30 @@
 import { Model,DataTypes } from "sequelize";
 import  sequelize  from './config.js';
 
-export class validador extends Model {}
+export class validator extends Model {}
 
-validador.init(
+validator.init(
     {
-        id_validador: {
+        id_validator: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        user_id: {
+        post_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        estado: {
-            type: DataTypes.STRING,
+        state: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: 'pendiente',
+            defaultValue: false,
         },
     },
     {
         sequelize,
-        modelName: "validador",
-        tableName: "valoraciones",
+        modelName: "validator",
+        tableName: "validators",
         createdAt: true,
         deletedAt: true,
     },

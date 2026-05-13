@@ -1,47 +1,36 @@
 import { Model,  DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class denuncia_comentario extends Model {}
+export class message extends Model {}
 
-denuncia_comentario.init({
+message.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
     allowNull: false,
   },
-  post_id: {
+  user_id_emisor: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  user_id: {
+  user_id_receptor: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },    
-  comment_id: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  contenido: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-},
-  description: {
+  content: {
     type: DataTypes.STRING(255),
     allowNull: true,
-  },
-  motivo: {
-    type: DataTypes.STRING(60),
-    allowNull: false,
-  },
-  estado: {
+    },
+  read: {
     type: DataTypes.BOOLEAN,
-    allowNull: true,
-  },
+    allowNull: false,
+    defaultValue: false,
+  },  
 }, {
   sequelize,
-  modelName: "denuncia_comentario",
-  tableName: "denuncias_comentarios",
+  modelName: "message",
+  tableName: "messages",
   createdAt: true,
   deletedAt: true,
 });

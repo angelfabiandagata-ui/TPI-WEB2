@@ -1,9 +1,9 @@
 import { Model,DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class publicacion extends Model {}
+export class publication extends Model {}
 
-publicacion.init(
+publication.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -17,7 +17,7 @@ publicacion.init(
       allowNull: false,
 
     },
-    estado: {
+    state: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
@@ -33,26 +33,24 @@ publicacion.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    cantidad_denuncias: {
+    number_complaints: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    cantidad_valoraciones: {
+    number_assessments: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    promedio_valoraciones: {
+    average_assessment: {
       type: DataTypes.FLOAT,
       allowNull: true,
     },
-
-
   },
   {
     // Other model options go here
     sequelize, // We need to pass the connection instance
-    modelName: 'publicacion', // We need to choose the model name
-    tableName: 'publicaciones',
+    modelName: 'publication', // We need to choose the model name
+    tableName: 'publications',
     createdAt: true,
     deletedAt: true,
     updatedAt: true,

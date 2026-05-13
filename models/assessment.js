@@ -1,9 +1,9 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class valoracion extends Model {}
+export class assessment extends Model {}
 
-valoracion.init(
+assessment.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,15 +19,15 @@ valoracion.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    puntaje: {
-      type: DataTypes.INTEGER,
+    score: {
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: "valoracion",
-    tableName: "valoraciones",
+    modelName: "assessment",
+    tableName: "assessments",
     createdAt: true,
     deletedAt: true,
   },

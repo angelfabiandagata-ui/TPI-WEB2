@@ -26,16 +26,16 @@ user.init(
             allowNull: false,
             unique: true,
         },
-        foto_de_perfil: {
+        profile_photo: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        Nro_publicaciones_bajadas: {
+        number_publications_removed: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        estado: {
+        state: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,

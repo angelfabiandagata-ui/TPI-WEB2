@@ -1,9 +1,9 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "./config.js";
 
-export class etiqueta extends Model { }
+export class label extends Model { }
 
-etiqueta.init(
+label.init(
     {
           id: {
             type: DataTypes.INTEGER,
@@ -11,19 +11,23 @@ etiqueta.init(
             primaryKey: true,
             allowNull: false,
   },
-        nombre: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+        },
+        post_id: {  
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
     },
     {
         sequelize,
-        modelName: "etiqueta",
-        tableName: "etiquetas",
+        modelName: "label",
+        tableName: "labels",
         createdAt: true,
         deletedAt: true,
     }
