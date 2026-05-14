@@ -4,6 +4,7 @@ import pug from 'pug';
 import { auth } from './middleware/auth.js';
 import './models/sync.js';
 import sequelize, { connectDatabase } from './models/config.js';
+import RegYLogin from './controller/registroYLogin.js';
 
 
 // CONSTANTES
@@ -18,6 +19,8 @@ app.set('views', './views');
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(RegYLogin);
+app.use(auth);
 
 // rutas
 app.get("/",(req, res , next)=>{
@@ -32,6 +35,9 @@ app.get("/login",(req, res , next)=>{
     res.render("login");
 })
 
+app.get("/signup",(req, res , next)=>{
+    res.render("signup");
+})
 
 // lisener del servidor y conexion a la base de datos
 connectDatabase()
