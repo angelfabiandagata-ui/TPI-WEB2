@@ -5,18 +5,30 @@ block content
     //- 1. Cabecera del Perfil
     header.profile-header
       .profile-avatar-container
-        if usuario && usuario.avatar
-          img(src=`/uploads/${usuario.avatar}`, alt="Foto de perfil", class="profile-avatar")
+        if userLogueado && usuario && userLogueado.id === usuario.id
+          label.avatar-changer(for="file-avatar-input" style="cursor: pointer; position: relative; display: block;")
+            if usuario.profile_photo 
+              img#profile-avatar-img(src=usuario.profile_photo , alt="Foto de perfil", class="profile-avatar")
+            else
+              img#profile-avatar-img(src="/images/default-avatar.png", alt="Avatar por defecto", class="profile-avatar")
+            
+            .avatar-overlay Cambiar foto
+          
+          input#file-avatar-input(type="file" accept="image/*" style="display: none;")
+        
         else
-          img(src="/images/default-avatar.png", alt="Avatar por defecto", class="profile-avatar")
+          if usuario && usuario.profile_photo
+            img(src=usuario.avatar, alt="Foto de perfil", class="profile-avatar")
+          else
+            img(src="/images/default-avatar.png", alt="Avatar por defecto", class="profile-avatar")
       
       .profile-info
         .profile-title-row
           h2.profile-username #{usuario ? usuario.username : 'Usuario Invitado'}
-        if userLogueado && usuario && userLogueado.id === usuario.id
+          if userLogueado && usuario && userLogueado.id === usuario.id
             .profile-actions-group(style="display: flex; gap: 10px; align-items: center;")
-            a.btn-edit-profile(href="/perfil/editar") Editar Perfil
-        else if userLogueado
+              a.btn-logout(href="/auth/logout" style="color: #ff4d4d; font-weight: bold; text-decoration: none; border: 1px solid #ff4d4d; padding: 5px 10px; border-radius: 4px;") Cerrar Sesión
+          else if userLogueado
             button.btn-follow Seguir
         
         .profile-stats
@@ -45,3 +57,36 @@ block content
           p Cámara en mano, pero sin fotos todavía.
           if userLogueado && usuario && userLogueado.id === usuario.id
             a.btn-upload(href="/publicaciones/nueva") Subir mi primera foto
+
+  script
+    | const fileInput = document.querySelector('#file-avatar-input');
+    | const avatarImg = document.querySelector('#profile-avatar-img');
+    | if (fileInput) {
+    |     fileInput.addEventListener('change', (e) => {
+    |         const file = e.target.files[0];
+    |         if (file) {
+    |             const reader = new FileReader();
+    |             reader.onloadend = async () => {
+    |                 const base64String = reader.result;
+    |                 try {
+    |                     const response = await fetch('/perfil/cambiar-avatar', {
+    |                         method: 'POST',
+    |                         headers: { 'Content-Type': 'application/json' },
+    |                         body: JSON.stringify({ avatar: base64String })
+    |                     });
+    |                     const data = await response.json();
+    |                     if (data.success) {
+    |                         avatarImg.src = base64String;
+    |                         alert("¡Foto de perfil actualizada!");
+    |                     } else {
+    |                         alert("Hubo un error al guardar la foto.");
+    |                     }
+    |                 } catch (error) {
+    |                     console.error("Error en la petición:", error);
+    |                     alert("Error de conexión al actualizar la foto.");
+    |                 }
+    |             };
+    |             reader.readAsDataURL(file);
+    |         }
+    |     });
+    | }

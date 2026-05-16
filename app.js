@@ -19,8 +19,8 @@ app.set('views', './views');
 
 // MIDDLEWARES
 app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(auth);
 app.use((req, res, next) => {
     req.session = app.locals.sessionFake;    
@@ -28,6 +28,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(RegYLogin);
+app.use(perfilRoutes);
 
 // rutas
 app.get("/",(req, res , next)=>{

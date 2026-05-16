@@ -30,7 +30,8 @@ export const mostrarPerfil = async (req, res) => {
 
         // 5. Renderizar la vista pasando los datos reales
         res.render("perfil", { 
-            usuario: usuarioReal, 
+            usuario: usuarioReal,
+            userLogueado: req.session.user, 
             publicaciones: misFotos, 
             seguidoresCount: cantSeguidores, 
             seguidosCount: cantSeguidos
@@ -39,5 +40,41 @@ export const mostrarPerfil = async (req, res) => {
     } catch (error) {
         console.error("Error en mostrarPerfil:", error);
         res.status(500).send("Error interno del servidor al cargar el perfil.");
+    }
+};
+
+export const cambiarAvatarAsincronico = async (req, res) => {
+    try {
+        if (!req.session || !req.session.user) {
+            return res.status(401).json({ success: false, message: "No autorizado" });
+        }
+
+        const userId = req.session.user.id;
+        const { avatar } = req.body; 
+
+        if (!avatar) {
+            return res.status(400).json({ success: false, message: "No se envió ninguna imagen" });
+        }
+
+
+        const usuarioReal = await user.findByPk(userId);
+        if (!usuarioReal) {
+            return res.status(404).json({ success: false, message: "Usuario no encontrado" });
+        }
+
+        usuarioReal.profile_photo = avatar;
+        await usuarioReal.save();
+
+
+        req.session.user = usuarioReal.get({ plain: true }); 
+        
+        req.session.save((err) => {
+            if (err) return res.status(500).json({ success: false, message: "Error de sesión" });
+            return res.json({ success: true });
+        });
+
+    } catch (error) {
+        console.error("❌ Error en cambiarAvatarAsincronico:", error);
+        return res.status(500).json({ success: false, message: "Error interno" });
     }
 };

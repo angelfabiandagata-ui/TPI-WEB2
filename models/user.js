@@ -53,7 +53,7 @@ user.init(
             unique: true,
         },
         profile_photo: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         number_publications_removed: {

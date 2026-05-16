@@ -374,3 +374,9 @@
     text-align: left;
     font-weight: 600;
 }
+
+.avatar-changer:hover .profile-avatar {
+    opacity: 0.8;
+    filter: brightness(70%);
+    transition: all 0.2s ease;
+}
