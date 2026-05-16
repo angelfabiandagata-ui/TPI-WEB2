@@ -237,16 +237,16 @@ news.belongsTo(comment,{
 user.belongsToMany(user, { 
     through: 'followers', 
     as: 'siguiendo',       // Alias para los que yo sigo
-    foreignKey: 'seguidor_id', 
-    otherKey: 'seguido_id' 
+    foreignKey: 'follower_id', 
+    otherKey: 'followed_id' 
 });
 
 // user a user (n - m)
 user.belongsToMany(user, { 
     through: 'followers', 
     as: 'seguidores',      
-    foreignKey: 'seguido_id', 
-    otherKey: 'seguidor_id' 
+    foreignKey: 'followed_id', 
+    otherKey: 'follower_id' 
 });
 
 // Relación para el Emisor en mensajeria

@@ -1,9 +1,21 @@
-mixin nav 
+mixin nav(userLogueado)
+  nav.navbar
+    .navbar-container
+      
+      ul.navbar-menu
         li
-          a(href='/index') Home
-        li
-          a(href='./login') Login
-        li
-          a(href='/explorar') Explorar
-        li    
-          a(href='./signup') Registrarse 
+          a.navbar-item(href='/index') Home
+        li  
+          a.navbar-item(href='/explorar') Explorar
+        
+        //- Evaluamos dinámicamente si el usuario está en la sesión
+        if userLogueado
+          li
+            a.navbar-item(href='/perfil') Mi Perfil
+          li
+            a.navbar-item.btn-logout-nav(href='/auth/logout') Salir
+        else
+          li
+            a.navbar-item(href='/auth/login') Login
+          li    
+            a.navbar-item.btn-signup-nav(href='/auth/signup') Registrarse

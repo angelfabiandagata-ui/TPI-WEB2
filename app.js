@@ -5,11 +5,13 @@ import { auth } from './middleware/auth.js';
 import './models/sync.js';
 import sequelize, { connectDatabase } from './models/config.js';
 import RegYLogin from './controller/registroYLogin.js';
-
+import perfilRoutes from './routes/perfilRoutes.js';
 
 // CONSTANTES
 const PORT = process.env.PORT;
 const app = express();
+  
+app.locals.sessionFake = { user: null };
 
 //cargar pug
 app.set("view engine", "pug");
@@ -19,8 +21,13 @@ app.set('views', './views');
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(RegYLogin);
 app.use(auth);
+app.use((req, res, next) => {
+    req.session = app.locals.sessionFake;    
+    res.locals.userLogueado = req.session.user || null;
+    next();
+});
+app.use(RegYLogin);
 
 // rutas
 app.get("/",(req, res , next)=>{
@@ -31,13 +38,23 @@ app.get("/index",(req, res , next)=>{
     res.render("index");
 })
 
-app.get("/login",(req, res , next)=>{
-    res.render("login");
+app.get("/explorar",(req, res , next)=>{
+    res.render("explorar");
 })
 
-app.get("/signup",(req, res , next)=>{
-    res.render("signup");
-})
+app.get("/auth/login", (req, res) => {
+    res.render("/auth/login"); 
+});
+
+app.get("/auth/signup", (req, res) => {
+    res.render("/auth/signup"); 
+});
+
+app.locals.sessionFake = { 
+    user: { id: 1, username: "Angel_Fabian" } 
+};
+
+app.use('/perfil', perfilRoutes);
 
 // lisener del servidor y conexion a la base de datos
 connectDatabase()
